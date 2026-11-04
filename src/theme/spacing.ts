@@ -5,3 +5,9 @@ export const spacing = {
   lg: 24,
   xl: 32,
 };
+export const borderRadius = {
+  sm: 6,
+  md: 10,
+  lg: 16,
+  full: 9999,
+};
