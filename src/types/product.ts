@@ -43,3 +43,21 @@ export interface CartItem {
   product: Product;
   quantity: number;
 }
+
+export interface OrderItem {
+  productId: number;
+  title: string;
+  thumbnail: string;
+  price: number;
+  quantity: number;
+  discountPercentage: number;
+}
+export interface Order {
+  orderId: string;
+  placedAt: string;
+  items: OrderItem[];
+  subtotal: number;
+  discount: number;
+  total: number;
+  status: 'confirmed' | 'processing' | 'shipped' | 'delivered';
+}

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Product, CartItem } from '../types/product';
+import { notificationService } from '../utils/notificationService';
 
 interface CartState {
   items: CartItem[];
@@ -25,19 +26,28 @@ export const useCartStore = create<CartState>()(
           const existingIndex = state.items.findIndex(
             item => item.product.id === product.id,
           );
+          let updated: CartItem[];
           if (existingIndex > -1) {
-            const updatedItems = [...state.items];
-            updatedItems[existingIndex].quantity += quantity;
-            return { items: updatedItems };
+            updated = [...state.items];
+            updated[existingIndex].quantity += quantity;
+          } else {
+            updated = [...state.items, { product, quantity }];
           }
-          return { items: [...state.items, { product, quantity }] };
+          notificationService.scheduleAbandonedCartReminder();
+          return { items: updated };
         });
       },
 
       removeFromCart: (productId: number) => {
-        set(state => ({
-          items: state.items.filter(item => item.product.id !== productId),
-        }));
+        set(state => {
+          const remaining = state.items.filter(
+            item => item.product.id !== productId,
+          );
+          if (remaining.length === 0) {
+            notificationService.cancelAbandonedCartReminder();
+          }
+          return { items: remaining };
+        });
       },
 
       updateQuantity: (productId: number, quantity: number) => {
@@ -52,7 +62,10 @@ export const useCartStore = create<CartState>()(
         }));
       },
 
-      clearCart: () => set({ items: [] }),
+      clearCart: () => {
+        notificationService.cancelAbandonedCartReminder();
+        set({ items: [] });
+      },
 
       getTotalItems: () => {
         return get().items.reduce((acc, item) => acc + item.quantity, 0);
