@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigation';
 import { CartItem } from '../../types/product';
@@ -16,6 +16,7 @@ import { styles } from './CartScreen.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../theme';
 import { IconNames } from '../../constants/iconsName';
+import { notificationService } from '../../utils/notificationService';
 const Icon = Ionicons as any;
 type CartNavProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -53,6 +54,11 @@ export const CartScreen = () => {
       });
     },
     [navigation],
+  );
+  useFocusEffect(
+    useCallback(() => {
+      notificationService.cancelAbandonedCartReminder();
+    }, []),
   );
 
   const renderItem = useCallback(
