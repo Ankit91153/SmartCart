@@ -14,4 +14,5 @@ export const colors = {
   success: '#10B981',
   successLight: '#D1FAE5',
   cardShadow: '#000000',
+  cardBg: '#F1F5F9',
 };

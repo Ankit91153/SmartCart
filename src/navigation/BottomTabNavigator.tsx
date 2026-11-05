@@ -17,7 +17,7 @@ export const BottomTabNavigator = () => {
         tabBarInactiveTintColor: '#64748B',
       }}
     >
-      <Tab.Screen name="Shop" component={ProductScreen} />
+      <Tab.Screen name="Products" component={ProductScreen} />
       <Tab.Screen name="Wishlist" component={WishlistScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Orders" component={OrdersScreen} />
