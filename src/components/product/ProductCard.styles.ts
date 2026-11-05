@@ -95,11 +95,6 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.textPrimary,
   },
-  originalPrice: {
-    fontSize: 11,
-    color: colors.textMuted,
-    textDecorationLine: 'line-through',
-  },
   addButton: {
     marginTop: spacing.sm,
     backgroundColor: colors.primary,
@@ -109,8 +104,31 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButtonText: {
-    color: '#FFFFFF',
+    color: colors.surface,
     fontSize: 12,
     fontWeight: '600',
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: colors.primaryLight,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.lightBlue,
+    height: 36,
+    paddingHorizontal: 6,
+    marginTop: 8,
+  },
+  qtyButton: {
+    width: 28,
+    height: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  quantityText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.blueDark,
   },
 });

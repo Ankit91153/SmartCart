@@ -6,6 +6,7 @@ import { BottomTabNavigator } from './BottomTabNavigator';
 import { ProductDetailsScreen } from '../screens/ProductDetailsScreen/ProductDetailsScreen';
 import { CheckoutScreen } from '../screens/CheckoutScreen/CheckoutScreen';
 import { OrderConfirmationScreen } from '../screens/OrderConfirmationScreen/OrderConfirmationScreen';
+import { SCREEN_NAMES } from '../constants/screen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,22 +15,24 @@ export const RootNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="MainTabs"
+          name={SCREEN_NAMES.MainTabs}
           component={BottomTabNavigator}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ProductDetails"
+          name={SCREEN_NAMES.ProductDetails}
           component={ProductDetailsScreen}
-          options={({ route }) => ({ title: route.params.title || 'Details' })}
+          options={({ route }) => ({
+            title: route.params.title || SCREEN_NAMES.Details,
+          })}
         />
         <Stack.Screen
-          name="Checkout"
+          name={SCREEN_NAMES.Checkout}
           component={CheckoutScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
-          name="OrderConfirmation"
+          name={SCREEN_NAMES.OrderConfirmation}
           component={OrderConfirmationScreen}
           options={{ headerShown: false }}
         />

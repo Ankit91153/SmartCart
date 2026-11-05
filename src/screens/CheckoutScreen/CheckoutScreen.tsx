@@ -13,6 +13,11 @@ import { RootStackParamList } from '../../types/navigation';
 import { useCartStore } from '../../store/useCartStore';
 import { useOrderStore } from '../../store/useOrderStore';
 import { styles } from './CheckoutScreen.style';
+import { colors } from '../../theme';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { IconNames } from '../../constants/iconsName';
+import { SCREEN_NAMES } from '../../constants/screen';
+const Icon = Ionicons as any;
 
 type CheckoutNavProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -45,7 +50,7 @@ export const CheckoutScreen = () => {
       await new Promise(resolve => setTimeout<any>(resolve, 1200));
       const confirmedOrder = placeOrder(items, subtotal, discount, finalTotal);
       clearCart();
-      navigation.replace('OrderConfirmation', {
+      navigation.replace(SCREEN_NAMES.OrderConfirmation, {
         orderId: confirmedOrder.orderId,
         totalAmount: confirmedOrder.total,
       });
@@ -74,30 +79,19 @@ export const CheckoutScreen = () => {
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Delivery Address</Text>
           <View style={styles.addressRow}>
-            <Text style={styles.addressIcon}>📍</Text>
+            <Icon name={IconNames.Location} size={24} color={colors.primary} />
             <View style={styles.addressDetails}>
-              <Text style={styles.addressName}>John Doe</Text>
+              <Text style={styles.addressName}>Ankit,</Text>
               <Text style={styles.addressText}>
                 Flat 402, Sunshine Towers, Silicon Valley, Bangalore - 560100
               </Text>
-              <View style={styles.deliveryBadge}>
-                <Text style={styles.deliveryBadgeText}>
-                  ⚡ Free Express Delivery
-                </Text>
-              </View>
             </View>
           </View>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Payment Method</Text>
-          <View style={styles.paymentRow}>
-            <Text style={styles.paymentIcon}>💵</Text>
-            <Text style={styles.paymentText}>
-              Cash on Delivery (Pre-selected)
-            </Text>
-            <Text style={styles.selectedBadge}>✅</Text>
-          </View>
+          <Text style={styles.paymentText}>Cash on Delivery</Text>
         </View>
 
         <View style={styles.card}>
@@ -115,7 +109,7 @@ export const CheckoutScreen = () => {
                 <Text style={styles.itemQty}>Qty: {item.quantity}</Text>
               </View>
               <Text style={styles.itemPrice}>
-                {(item.product.price * item.quantity).toFixed(2)}
+                ${(item.product.price * item.quantity).toFixed(2)}
               </Text>
             </View>
           ))}
@@ -126,14 +120,14 @@ export const CheckoutScreen = () => {
 
           <View style={styles.row}>
             <Text style={styles.label}>Items Total</Text>
-            <Text style={styles.value}>{subtotal.toFixed(2)}</Text>
+            <Text style={styles.value}>$ {subtotal.toFixed(2)}</Text>
           </View>
 
           {discount > 0 && (
             <View style={styles.row}>
               <Text style={styles.label}>Discount</Text>
               <Text style={[styles.value, styles.discountValue]}>
-                −{discount.toFixed(2)}
+                $ −{discount.toFixed(2)}
               </Text>
             </View>
           )}
@@ -147,7 +141,7 @@ export const CheckoutScreen = () => {
 
           <View style={styles.row}>
             <Text style={styles.totalLabel}>Total Amount</Text>
-            <Text style={styles.totalValue}>{finalTotal.toFixed(2)}</Text>
+            <Text style={styles.totalValue}>$ {finalTotal.toFixed(2)}</Text>
           </View>
         </View>
 
@@ -161,10 +155,10 @@ export const CheckoutScreen = () => {
           onPress={handlePlaceOrder}
         >
           {isSubmitting ? (
-            <ActivityIndicator size="small" color="#FFFFFF" />
+            <ActivityIndicator size="small" color={colors.surface} />
           ) : (
             <Text style={styles.placeOrderText}>
-              Place Order • {finalTotal.toFixed(2)}
+              Place Order • $ {finalTotal.toFixed(2)}
             </Text>
           )}
         </TouchableOpacity>

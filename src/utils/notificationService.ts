@@ -6,16 +6,10 @@ class NotificationService {
 
   scheduleAbandonedCartReminder(delayMs: number = 15000) {
     this.cancelAbandonedCartReminder();
-
-    this.isScheduled = true;
-    console.log(
-      `[NotificationService] Scheduled reminder in ${delayMs / 1000}s`,
-    );
-
     this.timerId = setTimeout(() => {
       if (this.isScheduled) {
         this.triggerNotification(
-          '🛒 You left items in your cart!',
+          'You left items in your cart!',
           'Don’t miss out! Your favorite items are waiting for you in SmartCart.',
         );
         this.isScheduled = false;
@@ -28,12 +22,6 @@ class NotificationService {
       clearTimeout(this.timerId);
       this.timerId = null;
     }
-    if (this.isScheduled) {
-      this.isScheduled = false;
-    }
-  }
-  getIsScheduled(): boolean {
-    return this.isScheduled;
   }
 
   private triggerNotification(title: string, message: string) {

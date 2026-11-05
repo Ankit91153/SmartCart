@@ -1,11 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigation';
@@ -13,17 +7,18 @@ import { Product } from '../../types/product';
 import { useWishlistStore } from '../../store/useWishlistStore';
 import { useCartStore } from '../../store/useCartStore';
 import { styles } from './WishlistScreen.style';
-
+import { colors } from '../../theme';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { IconNames } from '../../constants/iconsName';
+const Icon = Ionicons as any;
 type WishlistNavProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const WishlistScreen = () => {
   const navigation = useNavigation<WishlistNavProp>();
 
-
   const wishlist = useWishlistStore(state => state.wishlist);
   const toggleWishlist = useWishlistStore(state => state.toggleWishlist);
   const addToCart = useCartStore(state => state.addToCart);
-
 
   const handleProductPress = useCallback(
     (product: Product) => {
@@ -35,7 +30,6 @@ export const WishlistScreen = () => {
     [navigation],
   );
 
-
   const handleMoveToCart = useCallback(
     (product: Product) => {
       addToCart(product, 1);
@@ -44,11 +38,8 @@ export const WishlistScreen = () => {
     [addToCart, toggleWishlist],
   );
 
-
   const renderItem = useCallback(
     ({ item }: { item: Product }) => {
-      const hasDiscount = item.discountPercentage > 0;
-
       return (
         <TouchableOpacity
           activeOpacity={0.9}
@@ -66,7 +57,7 @@ export const WishlistScreen = () => {
               activeOpacity={0.7}
               onPress={() => toggleWishlist(item)}
             >
-              <Text style={styles.removeBtnIcon}>❤️</Text>
+              <Icon name={IconNames.Heart} size={20} color={colors.error} />
             </TouchableOpacity>
           </View>
 
@@ -85,11 +76,10 @@ export const WishlistScreen = () => {
 
               <View style={styles.priceRow}>
                 <Text style={styles.currentPrice}>
-                  {item.price.toFixed(2)}
+                  ${item.price.toFixed(2)}
                 </Text>
               </View>
             </View>
-
 
             <TouchableOpacity
               style={styles.moveToCartBtn}
@@ -110,17 +100,8 @@ export const WishlistScreen = () => {
   if (wishlist.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyIcon}>🤍</Text>
+        <Icon name={IconNames.Heart} size={40} color={colors.primary} />
         <Text style={styles.emptyTitle}>Your Wishlist is Empty</Text>
-        <Text style={styles.emptySubtitle}>
-          Save items that you like in your wishlist to purchase them later.
-        </Text>
-        <TouchableOpacity
-          style={styles.shopBtn}
-          onPress={() => navigation.navigate('MainTabs')}
-        >
-          <Text style={styles.shopBtnText}>Explore Products</Text>
-        </TouchableOpacity>
       </View>
     );
   }

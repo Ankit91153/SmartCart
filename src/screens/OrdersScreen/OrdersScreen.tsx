@@ -6,7 +6,10 @@ import { RootStackParamList } from '../../types/navigation';
 import { useOrderStore } from '../../store/useOrderStore';
 import { Order } from '../../types/product';
 import { styles } from './OrdersScreen.style';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../../theme';
+import { IconNames } from '../../constants/iconsName';
+const Icon = Ionicons as any;
 type OrdersNavProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const OrdersScreen = () => {
@@ -56,7 +59,7 @@ export const OrdersScreen = () => {
                   {orderItem.title}
                 </Text>
                 <Text style={styles.itemQtyPrice}>
-                  Qty: {orderItem.quantity} • {orderItem.price.toFixed(2)}
+                  Qty: {orderItem.quantity} • ${orderItem.price.toFixed(2)}
                 </Text>
               </View>
             </View>
@@ -67,7 +70,7 @@ export const OrdersScreen = () => {
 
         <View style={styles.cardFooter}>
           <Text style={styles.footerLabel}>Total Amount:</Text>
-          <Text style={styles.totalValue}>{item.total.toFixed(2)}</Text>
+          <Text style={styles.totalValue}>${item.total.toFixed(2)}</Text>
         </View>
       </View>
     ),
@@ -77,17 +80,8 @@ export const OrdersScreen = () => {
   if (orders.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyIcon}>📦</Text>
+        <Icon name={IconNames.Cube} size={40} color={colors.primary} />
         <Text style={styles.emptyTitle}>No Orders Yet</Text>
-        <Text style={styles.emptySubtitle}>
-          When you place orders, they will appear here.
-        </Text>
-        <TouchableOpacity
-          style={styles.shopBtn}
-          onPress={() => navigation.navigate('MainTabs')}
-        >
-          <Text style={styles.shopBtnText}>Start Shopping</Text>
-        </TouchableOpacity>
       </View>
     );
   }

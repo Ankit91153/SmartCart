@@ -20,6 +20,9 @@ import { productService } from '../../api/productService';
 import { styles } from './ProductScreen.style';
 import { colors } from '../../theme';
 import { ProductCard } from '../../components/product/ProductCard';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { IconNames } from '../../constants/iconsName';
+const Icon = Ionicons as any;
 
 type HomeScreenNavProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -48,7 +51,6 @@ const SORT_OPTIONS = [
 export const ProductScreen = () => {
   const navigation = useNavigation<HomeScreenNavProp>();
 
-  // ── States ──────────────────────────────────────
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -316,7 +318,11 @@ export const ProductScreen = () => {
       <View>
         <View style={styles.searchRow}>
           <View style={styles.searchBar}>
-            <Text style={styles.searchIcon}>🔍</Text>
+            <Icon
+              name={IconNames.SearchOutline}
+              size={18}
+              color={colors.textMuted}
+            />
             <TextInput
               style={styles.searchInput}
               placeholder="Search products..."
@@ -330,7 +336,11 @@ export const ProductScreen = () => {
                 style={styles.clearBtn}
                 onPress={() => handleSearchChange('')}
               >
-                <Text style={styles.clearBtnText}>✕</Text>
+                <Icon
+                  name={IconNames.Close}
+                  size={18}
+                  color={colors.textMuted}
+                />
               </TouchableOpacity>
             )}
           </View>
@@ -339,7 +349,7 @@ export const ProductScreen = () => {
             style={[styles.sortBtn, sortKey ? styles.sortBtnActive : null]}
             onPress={() => setShowSortModal(true)}
           >
-            <Text style={styles.sortBtnText}>⇅</Text>
+            <Icon name={IconNames.Filter} size={18} color={colors.textMuted} />
           </TouchableOpacity>
         </View>
         <ScrollView
@@ -405,7 +415,10 @@ export const ProductScreen = () => {
   if (error && products.length === 0) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>⚠️ {error}</Text>
+        <Text style={styles.errorText}>
+          <Icon name={IconNames.Warning} size={18} color={colors.textMuted} />{' '}
+          {error}
+        </Text>
         <TouchableOpacity
           style={styles.retryButton}
           onPress={() => loadProducts(searchQuery, activeCategory, sortKey)}
@@ -429,7 +442,11 @@ export const ProductScreen = () => {
         ListEmptyComponent={() =>
           !loading ? (
             <View style={styles.emptyContainer}>
-              <Text style={{ fontSize: 32 }}>🔍</Text>
+              <Icon
+                name={IconNames.SearchOutline}
+                size={18}
+                color={colors.textMuted}
+              />
               <Text style={styles.emptyText}>No products found</Text>
             </View>
           ) : (
@@ -452,7 +469,6 @@ export const ProductScreen = () => {
         ListFooterComponent={renderFooter}
       />
 
-      {/* Sort Modal */}
       <Modal
         visible={showSortModal}
         transparent
@@ -480,7 +496,13 @@ export const ProductScreen = () => {
                 >
                   {opt.label}
                 </Text>
-                {sortKey === opt.value && <Text>✓</Text>}
+                {sortKey === opt.value && (
+                  <Icon
+                    name={IconNames.CheckmarkOutline}
+                    size={18}
+                    color={colors.textMuted}
+                  />
+                )}
               </TouchableOpacity>
             ))}
           </View>

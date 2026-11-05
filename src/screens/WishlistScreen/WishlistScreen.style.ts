@@ -7,7 +7,7 @@ const CARD_WIDTH = (width - 40) / 2;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.background,
   },
   listContent: {
     padding: 14,
@@ -19,10 +19,10 @@ export const styles = StyleSheet.create({
   },
   card: {
     width: CARD_WIDTH,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surface,
     borderRadius: 14,
     overflow: 'hidden',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 6,
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: 140,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
   },
   image: {
     width: '100%',
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     height: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
   },
   brand: {
     fontSize: 10,
-    color: '#64748B',
+    color: colors.textSecondary,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 2,
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 6,
     height: 32,
   },
@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
   },
   originalPrice: {
     fontSize: 11,
-    color: '#94A3B8',
+    color: colors.textMuted,
     textDecorationLine: 'line-through',
   },
 
@@ -102,7 +102,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   moveToCartText: {
-    color: '#FFFFFF',
+    color: colors.surface,
     fontSize: 12,
     fontWeight: '700',
   },
@@ -120,25 +120,7 @@ export const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 6,
-  },
-  emptySubtitle: {
-    fontSize: 13,
-    color: '#64748B',
-    textAlign: 'center',
-    marginBottom: 20,
-    lineHeight: 18,
-  },
-  shopBtn: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 10,
-  },
-  shopBtnText: {
-    color: '#FFFFFF',
-    fontWeight: '700',
-    fontSize: 14,
   },
 });

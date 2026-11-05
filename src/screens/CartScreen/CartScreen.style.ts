@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: spacing.sm,
   },
   emptySubtitle: {
@@ -46,11 +46,11 @@ export const styles = StyleSheet.create({
 
   itemCard: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,
     shadowRadius: 4,
@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 8,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
   },
   itemInfo: {
     flex: 1,
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#0F172A',
+    color: colors.textPrimary,
     lineHeight: 18,
     marginBottom: 4,
   },
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
   },
   itemOriginalPrice: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: colors.textMuted,
     textDecorationLine: 'line-through',
     marginLeft: 6,
   },
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
   qtyControl: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
   qtyText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     paddingHorizontal: 10,
   },
   deleteBtn: {
@@ -128,12 +128,12 @@ export const styles = StyleSheet.create({
   },
 
   summaryCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 20,
     marginTop: 8,
     marginBottom: 12,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06,
     shadowRadius: 6,
@@ -142,7 +142,7 @@ export const styles = StyleSheet.create({
   summaryTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 14,
   },
   summaryRow: {
@@ -152,26 +152,26 @@ export const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 14,
-    color: '#64748B',
+    color: colors.textSecondary,
   },
   summaryValue: {
     fontSize: 14,
-    color: '#0F172A',
+    color: colors.textPrimary,
     fontWeight: '500',
   },
   summaryDiscount: {
-    color: '#16A34A',
+    color: colors.success,
     fontWeight: '600',
   },
   divider: {
     height: 1,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
     marginVertical: 10,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
   },
   totalValue: {
     fontSize: 18,
@@ -188,7 +188,7 @@ export const styles = StyleSheet.create({
     marginTop: 16,
   },
   checkoutBtnText: {
-    color: '#fff',
+    color: colors.surface,
     fontSize: 16,
     fontWeight: '700',
   },
@@ -204,7 +204,7 @@ export const styles = StyleSheet.create({
   },
   clearBtnText: {
     fontSize: 13,
-    color: '#EF4444',
+    color: colors.error,
     fontWeight: '600',
   },
 });

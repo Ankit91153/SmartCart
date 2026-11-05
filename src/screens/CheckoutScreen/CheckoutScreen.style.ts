@@ -4,7 +4,7 @@ import { colors } from '../../theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: 16,
@@ -12,11 +12,11 @@ export const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 12,
   },
 
@@ -44,16 +44,16 @@ export const styles = StyleSheet.create({
   addressName: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 2,
   },
   addressText: {
     fontSize: 13,
-    color: '#64748B',
+    color: colors.textSecondary,
     lineHeight: 18,
   },
   deliveryBadge: {
-    backgroundColor: '#DCFCE7',
+    backgroundColor: colors.successLight,
     alignSelf: 'flex-start',
     borderRadius: 6,
     paddingHorizontal: 8,
@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   },
   deliveryBadgeText: {
     fontSize: 12,
-    color: '#16A34A',
+    color: colors.success,
     fontWeight: '600',
   },
 
@@ -71,13 +71,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.cardBg,
   },
   itemThumb: {
     width: 48,
     height: 48,
     borderRadius: 8,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
   },
   itemDetails: {
     flex: 1,
@@ -86,28 +86,28 @@ export const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 2,
   },
   itemQty: {
     fontSize: 12,
-    color: '#64748B',
+    color: colors.textSecondary,
   },
   itemPrice: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
   },
 
   // ── Payment Mock ─────────────────────────────────
   paymentRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EFF6FF',
+    backgroundColor: colors.primaryLight,
     borderRadius: 10,
     padding: 12,
     borderWidth: 1,
-    borderColor: '#BFDBFE',
+    borderColor: colors.lightBlue,
   },
   paymentIcon: {
     fontSize: 22,
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     fontWeight: '600',
-    color: '#1E40AF',
+    color: colors.blueDark,
   },
   selectedBadge: {
     fontSize: 16,
@@ -130,26 +130,26 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#64748B',
+    color: colors.textSecondary,
   },
   value: {
     fontSize: 14,
-    color: '#0F172A',
+    color: colors.textPrimary,
     fontWeight: '500',
   },
   discountValue: {
-    color: '#16A34A',
+    color: colors.success,
     fontWeight: '600',
   },
   divider: {
     height: 1,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.cardBg,
     marginVertical: 10,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
   },
   totalValue: {
     fontSize: 18,
@@ -174,7 +174,7 @@ export const styles = StyleSheet.create({
     opacity: 0.7,
   },
   placeOrderText: {
-    color: '#FFFFFF',
+    color: colors.surface,
     fontSize: 16,
     fontWeight: '700',
   },

@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   retryText: {
-    color: '#FFFFFF',
+    color: colors.surface,
     fontWeight: '600',
   },
   // ── Search bar ───────────────────────────────────
@@ -56,12 +56,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 42,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
     gap: 6,
   },
   searchIcon: {
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: '#0F172A',
+    color: colors.textPrimary,
     paddingVertical: 0,
   },
   clearBtn: {
@@ -78,21 +78,21 @@ export const styles = StyleSheet.create({
   },
   clearBtnText: {
     fontSize: 16,
-    color: '#94A3B8',
+    color: colors.textMuted,
   },
   sortBtn: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderRadius: 10,
     width: 42,
     height: 42,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
   },
   sortBtnActive: {
-    backgroundColor: '#2563EB',
-    borderColor: '#2563EB',
+    backgroundColor: colors.primary,
+    borderColor: colors.border,
   },
   sortBtnText: {
     fontSize: 18,
@@ -107,23 +107,23 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 7,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
     marginRight: 8,
   },
   chipActive: {
-    backgroundColor: '#2563EB',
-    borderColor: '#2563EB',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   chipText: {
     fontSize: 13,
-    color: '#64748B',
+    color: colors.textSecondary,
     fontWeight: '500',
     textTransform: 'capitalize',
   },
   chipTextActive: {
-    color: '#fff',
+    color: colors.surface,
     fontWeight: '600',
   },
   modalOverlay: {
@@ -132,7 +132,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalSheet: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
@@ -141,23 +141,23 @@ export const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: colors.textPrimary,
     marginBottom: 16,
   },
   sortOption: {
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.cardBg,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   sortOptionText: {
     fontSize: 15,
-    color: '#0F172A',
+    color: colors.textPrimary,
   },
   sortOptionActive: {
-    color: '#2563EB',
+    color: colors.primary,
     fontWeight: '600',
   },
 
@@ -169,7 +169,7 @@ export const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 15,
-    color: '#64748B',
+    color: colors.textSecondary,
     marginTop: 8,
   },
 });

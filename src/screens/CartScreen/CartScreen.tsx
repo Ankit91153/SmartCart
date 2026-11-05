@@ -13,7 +13,10 @@ import { RootStackParamList } from '../../types/navigation';
 import { CartItem } from '../../types/product';
 import { useCartStore } from '../../store/useCartStore';
 import { styles } from './CartScreen.style';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../../theme';
+import { IconNames } from '../../constants/iconsName';
+const Icon = Ionicons as any;
 type CartNavProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const CartScreen = () => {
@@ -71,7 +74,9 @@ export const CartScreen = () => {
               </Text>
 
               <View style={styles.priceRow}>
-                <Text style={styles.itemPrice}>{product.price.toFixed(2)}</Text>
+                <Text style={styles.itemPrice}>
+                  ${product.price.toFixed(2)}
+                </Text>
               </View>
             </View>
 
@@ -81,7 +86,11 @@ export const CartScreen = () => {
                   style={styles.qtyBtn}
                   onPress={() => updateQuantity(product.id, quantity - 1)}
                 >
-                  <Text style={styles.qtyBtnText}>−</Text>
+                  <Icon
+                    name={IconNames.Remove}
+                    size={14}
+                    color={colors.primary}
+                  />
                 </TouchableOpacity>
 
                 <Text style={styles.qtyText}>{quantity}</Text>
@@ -90,14 +99,14 @@ export const CartScreen = () => {
                   style={styles.qtyBtn}
                   onPress={() => updateQuantity(product.id, quantity + 1)}
                 >
-                  <Text style={styles.qtyBtnText}>+</Text>
+                  <Icon name={IconNames.Add} size={14} color={colors.primary} />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
                 style={styles.deleteBtn}
                 onPress={() => removeFromCart(product.id)}
               >
-                <Text style={styles.deleteBtnText}>🗑️</Text>
+                <Icon name={IconNames.Trash} size={14} color={colors.error} />
               </TouchableOpacity>
             </View>
           </View>
@@ -114,17 +123,8 @@ export const CartScreen = () => {
   if (items.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyIcon}>🛒</Text>
+        <Icon name="cart" size={40} color={colors.primary} />
         <Text style={styles.emptyTitle}>Your cart is empty</Text>
-        <Text style={styles.emptySubtitle}>
-          Looks like you haven't added anything to your cart yet.
-        </Text>
-        <TouchableOpacity
-          style={styles.shopBtn}
-          onPress={() => navigation.navigate('MainTabs')}
-        >
-          <Text style={styles.shopBtnText}>Start Shopping</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -134,14 +134,14 @@ export const CartScreen = () => {
 
       <View style={styles.summaryRow}>
         <Text style={styles.summaryLabel}>Subtotal</Text>
-        <Text style={styles.summaryValue}>{subtotal.toFixed(2)}</Text>
+        <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
       </View>
 
       {discount > 0 && (
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount Savings</Text>
           <Text style={[styles.summaryValue, styles.summaryDiscount]}>
-            −{discount.toFixed(2)}
+            $−{discount.toFixed(2)}
           </Text>
         </View>
       )}
@@ -150,7 +150,7 @@ export const CartScreen = () => {
 
       <View style={styles.summaryRow}>
         <Text style={styles.totalLabel}>Total Payable</Text>
-        <Text style={styles.totalValue}>{finalTotal.toFixed(2)}</Text>
+        <Text style={styles.totalValue}>${finalTotal.toFixed(2)}</Text>
       </View>
 
       <TouchableOpacity
