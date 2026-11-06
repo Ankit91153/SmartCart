@@ -1,97 +1,111 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SmartCart — Mobile App
 
-# Getting Started
+A clean, production-ready React Native SmartCart application built as part of the technical evaluation. The app integrates with the DummyJSON API and implements offline caching, cart persistence, debounced search, performance optimizations, and abandoned-cart notifications.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## Tech Stack & Libraries
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Framework:** React Native (0.88+) with TypeScript
+- **Navigation:** React Navigation (Native Stack + Bottom Tabs)
+- **State Management:** Zustand (with AsyncStorage persistence)
+- **Networking:** Axios with custom response/error interceptor
+- **Icons:** React Native Vector Icons (Ionicons)
+- **Testing:** Jest
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
+## Architectural Decisions
+
+### 1. State Management: Why Zustand over Redux Toolkit?
+
+For this application, I chose **Zustand** instead of Redux Toolkit for the following reasons:
+
+1. **Lightweight & Zero Boilerplate:** Redux Toolkit requires writing slices, dispatch actions, reducers, and wrapping components with providers. Zustand needs zero context providers at the root and handles state updates with simple set/get functions.
+2. **Selective Component Re-renders:** Zustand uses selector hooks (e.g., `useCartStore(state => state.items)`). A component only re-renders when the exact slice of data it is listening to changes, reducing unnecessary renders on flat lists.
+3. **Built-in Middleware Persistence:** Zustand comes with `persist` middleware out of the box, allowing cart and order states to sync with `AsyncStorage` effortlessly without complex configuration like redux-persist.
+4. **Bundle Size:** Zustand is under 2KB minified, making the app faster to initialize.
+
+### 2. Offline First & Caching Strategy
+
+The app supports viewing and interacting with products even without an active internet connection:
+- **API First:** On network availability, fresh products and category lists are fetched and automatically cached into `AsyncStorage`.
+- **Offline Fallback:** If the network request fails (or in airplane mode), the app switches to offline mode:
+  - Previously cached products and categories are restored into the UI.
+  - A subtle offline banner informs the user that cached data is being displayed.
+  - **Client-side Filtering & Sorting:** When offline, search queries, category filters, and price/rating sorting are handled locally using optimized JavaScript array methods (`.filter()` and `.sort()`).
+
+### 3. Abandoned Cart Notifications
+
+- When an item is added to the cart, a scheduled reminder timer is initiated.
+- If the cart remains idle and un-purchased, a notification alert reminds the user about their pending items.
+- If the user clears the cart or proceeds through checkout, the pending reminder is immediately cancelled to prevent spamming.
+
+---
+
+## Project Structure
+
+```
+SmartCart/
+├── __tests__/                  # Unit tests (Cart)
+├── android/                    # Android native configuration
+├── ios/                        # iOS native configuration
+└── src/
+    ├── api/                    # Axios client & DummyJSON API endpoints
+    ├── components/             # Reusable UI components (ProductCard, etc.)
+    ├── navigation/             # Root Stack & Bottom Tab navigators
+    ├── screens/
+    │   ├── ProductScreen/      # Product listing, search, categories, sorting
+    │   ├── ProductDetailsScreen/# Image gallery, stock, reviews, similar items
+    │   ├── CartScreen/         # Cart item controls, price summary, checkout CTA
+    │   ├── CheckoutScreen/     # Simulated address, payment, order summary
+    │   ├── OrderConfirmationScreen/ # Order success screen
+    │   ├── OrdersScreen/       # Purchase history with order statuses
+    │   └── WishlistScreen/     # Wishlist grid with move-to-cart
+    ├── store/                  # Zustand stores (useCartStore, useWishlistStore, useOrderStore)
+    ├── theme/                  # Color palette and spacing constants
+    ├── types/                  # TypeScript interfaces (Product, Cart, Order, Nav)
+    └── utils/                  # Currency formatting, Notification manager
+```
+
+---
+
+## Setup & Running Locally
+
+### Prerequisites
+- Node.js >= 18
+- JDK 17
+- Android Studio & Android SDK setup with emulator or physical device
+
+### 1. Clone & Install Dependencies
+```bash
+git clone https://github.com/Ankit91153/SmartCart.git
+cd SmartCart
+npm install
+```
+
+### 2. Start Metro Bundler
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+### 3. Run on Android
+In a separate terminal:
+```bash
+npx react-native run-android
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## Running Unit Tests
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+The test suite covers cart calculations, quantities, discounts, and search logic:
 
-```sh
-bundle install
+```bash
+npm test
 ```
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
+To run a specific test file:
+```bash
+npm test cart.test.ts
 ```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
